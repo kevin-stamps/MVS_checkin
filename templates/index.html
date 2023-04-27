@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Visitor Check-In</title>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='ESRW_Logo.png') }}" alt="Company Logo">
+        <h1>Visitor Check-In</h1>
+        <form action="/submit" method="post">
+            <label for="name">Name:</label><input type="text" id="name" name="name" required><br><br>
+            <label for="address">Address:</label><input type="text" id="address" name="address" required><br><br>
+            <label for="zipcode">Zip Code:</label><input type="text" id="zipcode" name="zipcode" required><br><br>
+            <label for="phone">Phone:</label><input type="text" id="phone" name="phone" required><br><br>
+            <label for="email">Email:</label><input type="email" id="email" name="email" required><br><br>
+            <label for="branch">Branch of Service:</label>
+            <select id="branch" name="branch" required>
+                <option value="" disabled selected>Select a branch</option>
+                <option value="Army">Army</option>
+                <option value="Marine Corps">Marine Corps</option>
+                <option value="Navy">Navy</option>
+                <option value="Air Force">Air Force</option>
+                <option value="Coast Guard">Coast Guard</option>
+                <option value="Space Force">Space Force</option>
+            </select><br><br>
+            <label for="relationship">Are you a spouse or dependent of a veteran?</label>
+            <select id="relationship" name="relationship" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="spouse">Spouse</option>
+                <option value="dependent">Dependent</option>
+                <option value="no">No</option>
+            </select><br><br>
+            <label for="reason">Reason for Visit:</label>
+            <select id="reason" name="reason" required>
+                <option value="" disabled selected>Select a reason</option>
+                <option value="Employment">Employment</option>
+                <option value="Emergency Support – Community One Source">Emergency Support – Community One Source</option>
+                <option value="Transition Support">Transition Support</option>
+                <option value="Fitness Center">Fitness Center</option>
+                <option value="Computer Lab">Computer Lab</option>
+                <option value="Gaming Center">Gaming Center</option>
+                <option value="Laundry Facilities">Laundry Facilities</option>
+                <option value="Meeting with VA">Meeting with VA</option>
+                <option value="Meeting with other Resources">Meeting with other Resources</option>
+                <option value="Programs">Programs</option>
+                <option value="Class Offering">Class Offering</option>
+                <option value="Other">Other</option>
+            </select><br><br>            
+            <div id="other_reason" style="display:none;">
+                <label for="other_reason_input">Other Reason:</label>
+                <input type="text" id="other_reason_input" name="other_reason_input">
+            </div>
+            <input type="submit" value="Submit">
+        </form> 
+        <script>
+            // Display the Other Reason input field when "Other" is selected
+            var reason = document.getElementById("reason");
+            var other_reason = document.getElementById("other_reason");
+            reason.addEventListener("change", function() {
+                if (reason.value === "Other") {
+                    other_reason.style.display = "block";
+                } else {
+                    other_reason.style.display = "none";
+                }
+            });
+        </script>        
+    </div>
+</body>
+</html>
