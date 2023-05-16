@@ -17,7 +17,7 @@ def submit():
     phone = request.form['phone']
     email = request.form['email']
     which_applies_to_you = request.form['which_applies_to_you']
-    relationship = request.form['relationship']
+
     reason = request.form['reason']
 
     # Modified code to add a dropdown box for the reason for visit question
@@ -25,17 +25,17 @@ def submit():
     if reason not in reason_options:
         return '<h1>Please select a valid reason for visit.</h1>'
     if reason == 'Other':
-        return render_template('other_reason.html', first_name=first_name, last_name=last_name, address=address, zipcode=zipcode, phone=phone, email=email, which_applies_to_you=which_applies_to_you, relationship=relationship)
+        return render_template('other_reason.html', first_name=first_name, last_name=last_name, address=address, zipcode=zipcode, phone=phone, email=email, which_applies_to_you=which_applies_to_you)
 
     if not first_name or not last_name:
         return '<h1>Please enter a first and last name.</h1>'
 
     with open('visitors.csv', 'a', newline='') as csvfile:
-        fieldnames = ['first_name', 'last_name', 'address', 'zipcode', 'phone', 'email', 'which_applies_to_you', 'relationship', 'reason']
+        fieldnames = ['first_name', 'last_name', 'address', 'zipcode', 'phone', 'email', 'which_applies_to_you', 'reason']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writerow({'first_name': first_name, 'last_name': last_name, 'address': address, 'zipcode': zipcode, 'phone': phone, 'email': email, 'which_applies_to_you': which_applies_to_you, 'relationship': relationship, 'reason': reason})
+        writer.writerow({'first_name': first_name, 'last_name': last_name, 'address': address, 'zipcode': zipcode, 'phone': phone, 'email': email, 'which_applies_to_you': which_applies_to_you, 'reason': reason})
 
     return render_template('thankyou.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5006)
+    app.run(debug=True, port=5003)
